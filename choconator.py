@@ -4,7 +4,7 @@
 import discord
 import os
 from dotenv import load_dotenv
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 # import cogs
 from cogs import utility_cog
@@ -17,8 +17,8 @@ intents.message_content = True
 intents.guilds = True
 
 # environment variables
-TOKEN = os.getenv('CHOCONATOR_TOKEN')
-if TOKEN is None:
+CHOCONATOR_TOKEN = os.getenv('CHOCONATOR_TOKEN')
+if CHOCONATOR_TOKEN is None:
     print("Error: CHOCONATOR_TOKEN environment variable is not set.")
     exit(1)
 
@@ -39,7 +39,7 @@ async def on_ready():
     for guilds in bot.guilds:
         servers += f'{guilds.name}\n'
     print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
-    await bot.change_presence(activity=discord.Game(name='Type cn!help for available commands!'))
+    await bot.change_presence(activity=discord.Game(name='Type c.help for available commands!'))
 
 
 # event for disconnecting
@@ -49,4 +49,4 @@ async def on_disconnect():
 
 
 # run the bot
-bot.run(TOKEN)
+bot.run(CHOCONATOR_TOKEN)

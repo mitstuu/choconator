@@ -44,9 +44,9 @@ def load_data():
 
 
 # command to set a user's birthday
-async def birthday(ctx, day: int, month: int):
+async def birthday(ctx, month: int, day: int):
     """
-    Set your birthday.
+    Set your birthday. Example: c.bday 1 1 (for January 1st)
     :param day: The day of your birthday.
     :param month: The month of your birthday.
     """
@@ -67,7 +67,7 @@ async def birthday(ctx, day: int, month: int):
 # loop task function to check for birthdays
 async def check_birthdays(bot):
     today = datetime.date.today()
-    birthday_channel = bot.get_channel(817123974147473478)
+    birthday_channel = bot.get_channel(877933827320856596)
     birthdays = load_data()
     for user_id, data in birthdays.items():
         if today.month == data['month'] and today.day == data['day']:
