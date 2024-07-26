@@ -15,6 +15,7 @@ load_dotenv()
 intents = discord.Intents.default()
 intents.message_content = True
 intents.guilds = True
+intents.members = True
 
 # environment variables
 CHOCONATOR_TOKEN = os.getenv('CHOCONATOR_TOKEN')
@@ -39,7 +40,7 @@ async def on_ready():
     for guilds in bot.guilds:
         servers += f'{guilds.name}\n'
     print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
-    await bot.change_presence(activity=discord.Game(name='Type c.help for available commands!'))
+    await bot.change_presence(activity=discord.Game(name='c.help'))
 
 
 # event for disconnecting

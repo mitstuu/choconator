@@ -29,7 +29,7 @@ class UtilityCog(commands.Cog):
     # before_loop function for the loop task
     @check_birthdays.before_loop
     async def before_check_birthdays(self):
-        await utility.before_check_birthdays()
+        await utility.before_check_birthdays(self.bot)
 
 def setup(bot):
     bot.add_cog(UtilityCog(bot))
