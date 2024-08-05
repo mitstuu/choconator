@@ -5,9 +5,10 @@ import discord
 import os
 from dotenv import load_dotenv
 from discord.ext import commands
+import importlib
 
 # import cogs
-from cogs import utility_cog
+from cogs import *
 
 load_dotenv()
 
@@ -18,7 +19,7 @@ intents.guilds = True
 intents.members = True
 
 # environment variables
-CHOCONATOR_TOKEN = os.getenv('CHOCONATOR_TOKEN')
+CHOCONATOR_TOKEN = os.getenv('CHOCODEV_TOKEN')
 if CHOCONATOR_TOKEN is None:
     print("Error: CHOCONATOR_TOKEN environment variable is not set.")
     exit(1)
@@ -27,7 +28,14 @@ if CHOCONATOR_TOKEN is None:
 bot = commands.Bot(command_prefix='c.', intents=intents)
 
 # load cogs
-utility_cog.setup(bot)
+# load cogs
+cog_directory = 'cogs'
+for filename in os.listdir(cog_directory):
+    if filename.endswith('.py') and not filename.startswith('__'):
+        cog_name = filename[:-3]  # Remove the .py extension
+        module = importlib.import_module(f'{cog_directory}.{cog_name}')
+        if hasattr(module, 'setup'):
+            module.setup(bot)
 
 
 ## events
@@ -50,4 +58,4 @@ async def on_disconnect():
 
 
 # run the bot
-bot.run(CHOCONATOR_TOKEN)
+bot.run(CHOCODEV_TOKEN)
