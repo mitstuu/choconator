@@ -58,4 +58,4 @@ async def on_disconnect():
 
 
 # run the bot
-bot.run(CHOCODEV_TOKEN)
+bot.run(CHOCONATOR_TOKEN)
