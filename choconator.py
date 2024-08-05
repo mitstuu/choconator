@@ -28,15 +28,14 @@ if CHOCONATOR_TOKEN is None:
 bot = commands.Bot(command_prefix='c.', intents=intents)
 
 # load cogs
-# load cogs
 cog_directory = 'cogs'
-for filename in os.listdir(cog_directory):
-    if filename.endswith('.py') and not filename.startswith('__'):
-        cog_name = filename[:-3]  # Remove the .py extension
-        module = importlib.import_module(f'{cog_directory}.{cog_name}')
-        if hasattr(module, 'setup'):
-            module.setup(bot)
-
+async def load_cogs():
+    for filename in os.listdir(cog_directory):
+        if filename.endswith('.py') and not filename.startswith('__'):
+            cog_name = filename[:-3]  # Remove the .py extension
+            module = importlib.import_module(f'{cog_directory}.{cog_name}')
+            if hasattr(module, 'setup'):
+                await module.setup(bot)
 
 ## events
 
