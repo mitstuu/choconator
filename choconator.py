@@ -33,9 +33,13 @@ async def load_cogs():
     for filename in os.listdir(cog_directory):
         if filename.endswith('.py') and not filename.startswith('__'):
             cog_name = filename[:-3]  # Remove the .py extension
-            module = importlib.import_module(f'{cog_directory}.{cog_name}')
-            if hasattr(module, 'setup'):
-                await module.setup(bot)
+            try:
+                module = importlib.import_module(f'{cog_directory}.{cog_name}')
+                if hasattr(module, 'setup'):
+                    await module.setup(bot)
+                print(f'Successfully loaded cog: {cog_name}')
+            except Exception as e:
+                print(f'Failed to load cog {cog_name}: {e}')
 
 ## events
 
@@ -48,6 +52,7 @@ async def on_ready():
         servers += f'{guilds.name}\n'
     print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
     await bot.change_presence(activity=discord.Game(name='c.help'))
+    await load_cogs() # Load the cogs when the bot is ready
 
 
 # event for disconnecting

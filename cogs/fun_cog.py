@@ -5,5 +5,5 @@ class FunCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-def setup(bot):
-    bot.add_cog(FunCog(bot))
+async def setup(bot):
+    await bot.add_cog(FunCog(bot))

@@ -32,6 +32,6 @@ class UtilityCog(commands.Cog):
     async def before_check_birthdays(self):
         await utility.before_check_birthdays(self.bot)
 
-def setup(bot):
-    bot.add_cog(UtilityCog(bot))
+async def setup(bot):
+    await bot.add_cog(UtilityCog(bot))
 
