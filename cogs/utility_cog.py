@@ -13,13 +13,14 @@ class UtilityCog(commands.Cog):
 
     # command to set a user's birthday
     @commands.command(name='bday', aliases=['birthday'])
-    async def birthday(self, ctx, month: int, day: int):
+    async def birthday(self, ctx, day: int, month: int, year: int = None):
         """
         Set your birthday. Example: c.bday 1 1 (for January 1st)
         :param day: The day of your birthday.
         :param month: The month of your birthday.
+        :param year: (optional) The year of your birthday.
         """
-        await utility.birthday(ctx, month, day)
+        await utility.birthday(ctx, day, month, year)
 
     # loop task for birthday checker
     @tasks.loop(hours=24)
