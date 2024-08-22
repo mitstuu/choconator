@@ -1,4 +1,3 @@
-from commands import fun
 from discord.ext import commands
 
 class FunCog(commands.Cog):
