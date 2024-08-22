@@ -30,7 +30,7 @@ class UtilityCog(commands.Cog):
 
     # ping command to measure response time
     @commands.command(name='ping')
-    async def ping(ctx):
+    async def ping(self, ctx):
         start_time = datetime.datetime.now()
         message = await ctx.reply("Pinging...")
         end_time = datetime.datetime.now()
