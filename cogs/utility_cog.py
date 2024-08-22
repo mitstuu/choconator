@@ -1,15 +1,34 @@
 from commands import utility
 from discord.ext import commands, tasks
+import discord
+import datetime
+import asyncio
+import json
+import os
+import calendar
 
 class UtilityCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.check_birthdays.start() # start the loop task for birthdays feature
 
-    # welcome messages
-    @commands.Cog.listener()
-    async def on_member_join(self, member):
-        await utility.on_member_join(member)
+        # event function for when a member joins the server
+    async def on_member_join(member):
+        # check if the member is not a bot and has no previous join date
+        if (not member.bot) and (member.joined_at is None):
+            # welcome card in welcome channel
+            channel = discord.utils.get(member.guild.text_channels, id=775210285853835265)
+            rules_channel = discord.utils.get(member.guild.text_channels, id=775210186364813372)
+            embed = discord.Embed(title=f'Welcome to Choco Bar, {member.display_name}!', description=f'Please read the {rules_channel.mention}, and we hope you enjoy your stay!', color=0xd95455)
+            embed.set_thumbnail(url=member.avatar.url)
+            embed.set_footer(text=f'Joined at {datetime.datetime.now()}')
+            await channel.send(embed=embed)
+
+            # welcome message in general chat
+            channel = discord.utils.get(member.guild.text_channels, id=820784545426964480)
+            welcomers = discord.utils.get(member.guild.roles, id=880797572166467644)
+            await channel.send(f'Welcome to Choco Bar, {member.mention}! {welcomers.mention}s, assemble!')
+
 
     # command to set a user's birthday
     @commands.command(name='bday', aliases=['birthday'])
