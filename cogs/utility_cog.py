@@ -1,4 +1,3 @@
-from commands import utility
 from discord.ext import commands, tasks
 import discord
 import datetime
@@ -29,6 +28,14 @@ class UtilityCog(commands.Cog):
             welcomers = discord.utils.get(member.guild.roles, id=880797572166467644)
             await channel.send(f'Welcome to Choco Bar, {member.mention}! {welcomers.mention}s, assemble!')
 
+    # ping command to measure response time
+    @commands.command(name='ping')
+    async def ping(ctx):
+        start_time = datetime.datetime.now()
+        message = await ctx.reply("Pinging...")
+        end_time = datetime.datetime.now()
+        response_time = (end_time - start_time).total_seconds() * 1000
+        await message.edit(content=f"Pong! Response time: {response_time} ms")
 
     # command to set a user's birthday
     @commands.command(name='bday', aliases=['birthday'])
