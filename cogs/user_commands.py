@@ -9,9 +9,10 @@ class UserCommands(commands.Cog):
     # Add your commands here
 
 
-    @commands.command()
+    @commands.hybrid_command(name="revivechat", description="Revive chat in the main channel")
     @commands.cooldown(1, 1800, commands.BucketType.guild)
-    async def revivechat(self, ctx):
+    @commands.guild_only()
+    async def revivechat(self, ctx: commands.Context):
         channel_id = 820784545426964480  # Replace with the desired channel ID
         if ctx.channel.id == channel_id:
             await ctx.send('Stop touching grass and chat with us! @mitstuu (replace with reviver ping)')
@@ -27,4 +28,6 @@ class UserCommands(commands.Cog):
             raise error
 
 async def setup(bot):
-    await bot.add_cog(UserCommands(bot))
+    cog = UserCommands(bot)
+    await bot.add_cog(cog)
+    await bot.tree.sync()
