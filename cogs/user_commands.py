@@ -30,4 +30,8 @@ class UserCommands(commands.Cog):
 async def setup(bot):
     cog = UserCommands(bot)
     await bot.add_cog(cog)
-    await bot.tree.sync()
+
+    # Make a "guild object" and sync there
+    guild = discord.Object(id=1379834078869852241) # test guild ID 
+    await bot.tree.sync(guild=guild)
+    print(f"Synced slash commands to guild")
