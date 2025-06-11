@@ -17,5 +17,13 @@ class UserCommands(commands.Cog):
         else:
             await ctx.send('This command can only be used in the main chat channel.')
 
+    @revivechat.error
+    async def revivechat_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            retry_after = int(error.retry_after)
+            await ctx.send(f"Please wait {retry_after} seconds before using this command again.")
+        else:
+            raise error
+
 async def setup(bot):
     await bot.add_cog(UserCommands(bot))
