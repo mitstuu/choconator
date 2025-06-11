@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import math
 
 class UserCommands(commands.Cog):
     def __init__(self, bot):
@@ -20,8 +21,8 @@ class UserCommands(commands.Cog):
     @revivechat.error
     async def revivechat_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
-            retry_after = int(error.retry_after)
-            await ctx.send(f"Please wait {retry_after} seconds before using this command again.")
+            minutes = math.ceil(error.retry_after / 60)
+            await ctx.send(f"Please wait {minutes} minute{'s' if minutes != 1 else ''} before using this command again.")
         else:
             raise error
 
