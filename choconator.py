@@ -58,7 +58,6 @@ async def on_ready():
     print(f"Global sync now has {len(global_synced)} command(s)") # Sync commands globally
     
     await bot.change_presence(activity=discord.Game(name='c.help'))
-    await load_cogs() # Load the cogs when the bot is ready
 
 # event for disconnecting
 @bot.event
