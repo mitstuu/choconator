@@ -60,16 +60,26 @@ async def on_ready():
 
     # (Optional) clear stale commands on that guild first
     guild_obj = discord.Object(id=775209879921098792)
-    await bot.tree.clear_commands(guild=guild_obj)
-    print("Cleared commands in test guild")
+    print("Attempting to clear commands in test guild")
+    try:
+        await bot.tree.clear_commands(guild=guild_obj)
+        print("Cleared commands in test guild")
+    except Exception as e:
+        print("Error during clear_commands:", repr(e))
 
-    # Now sync
-    synced = await bot.tree.sync(guild=guild_obj)
-    print("Synced these commands to guild:", [c.name for c in synced])
+    print("Attempting to sync commands in test guild")
+    try:
+        synced = await bot.tree.sync(guild=guild_obj)
+        print("Synced these commands to guild:", [c.name for c in synced])
+    except Exception as e:
+        print("Error during sync:", repr(e))
 
-    # Final check
-    cmds_after = [c.name for c in bot.tree.get_commands()]
-    print("Commands after sync:", cmds_after)
+    print("Checking commands after sync")
+    try:
+        cmds_after = [c.name for c in bot.tree.get_commands()]
+        print("Commands after sync:", cmds_after)
+    except Exception as e:
+        print("Error getting commands after sync:", repr(e))
 
 # event for disconnecting
 @bot.event
