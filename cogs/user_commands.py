@@ -35,4 +35,3 @@ class UserCommands(commands.Cog):
 async def setup(bot):
     cog = UserCommands(bot)
     await bot.add_cog(cog)
-    await bot.tree.sync(guild=discord.Object(id=775209879921098792))  # Sync the command to the specific guild
