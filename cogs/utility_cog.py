@@ -1,5 +1,6 @@
 from discord.ext import commands, tasks
 import discord
+from discord import app_commands
 import datetime
 import asyncio
 import json
@@ -29,12 +30,12 @@ class UtilityCog(commands.Cog):
             await channel.send(f'Welcome to Choco Bar, {member.mention}! {welcomers.mention}s, assemble!')
 
     # ping command to measure response time
-    @commands.application_command(name="ping", description="Check the bot's latency", guild=775209879921098792)
-    async def ping(self, ctx: commands.Context):
+    @app_commands.command(name="ping", description="Check the bot's latency")
+    async def ping(self, interaction: discord.Interaction):
         """Reports the bot’s websocket latency."""
         # bot.latency is in seconds; convert to ms and round
         latency_ms = round(self.bot.latency * 1000)
-        await ctx.send(f"Pong! Latency is {latency_ms}ms")
+        await interaction.response.send_message(f"Pong! Latency is {latency_ms}ms")
 
     # command to set a user's birthday
     @commands.command(name='bday', aliases=['birthday'])
