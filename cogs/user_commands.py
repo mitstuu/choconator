@@ -19,7 +19,7 @@ class UserCommands(commands.Cog):
         channel_id = 1130603670388617318
         if ctx.channel.id == channel_id:
             # allowed_mentions = discord.AllowedMentions(roles=True)
-            await ctx.send(f"Stop touching grass and chat with us! {REVIVER_ROLE_MENTION}")
+            await ctx.send(f"Stop touching grass and chat with us! {REVIVER_ROLE_MENTION}",allowed_mentions=allowed_mentions)
         else:
             await ctx.send('This command can only be used in the main chat channel.')
 
