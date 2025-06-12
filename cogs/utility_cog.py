@@ -29,11 +29,7 @@ class UtilityCog(commands.Cog):
             await channel.send(f'Welcome to Choco Bar, {member.mention}! {welcomers.mention}s, assemble!')
 
     # ping command to measure response time
-    @commands.hybrid_command(
-        name="ping",
-        description="Check the bot's latency",
-        #guild_ids=[775209879921098792]  # ← replace with your guild ID(s)
-    )
+    @commands.application_command(name="ping", description="Check the bot's latency", guild=775209879921098792) )
     async def ping(self, ctx: commands.Context):
         """Reports the bot’s websocket latency."""
         # bot.latency is in seconds; convert to ms and round

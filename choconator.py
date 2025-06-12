@@ -57,6 +57,9 @@ async def on_ready():
     global_synced = await bot.tree.sync()
     print(f"Global sync now has {len(global_synced)} command(s)") # Sync commands globally
     
+    for cmd in global_synced:   # Print the synced commands
+        print(f" • {cmd.name}")
+    
     await bot.change_presence(activity=discord.Game(name='c.help'))
 
 # event for disconnecting
