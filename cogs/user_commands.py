@@ -33,6 +33,6 @@ async def setup(bot):
     await bot.add_cog(cog)
 
     # Make a "guild object" and sync there
-    guild = discord.Object(id=1379834078869852241) # test guild ID 
+    guild = discord.Object(id=775209879921098792) # test guild ID 
     await bot.tree.sync(guild=guild)
     print(f"Synced slash commands to guild")
