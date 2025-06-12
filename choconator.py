@@ -62,7 +62,7 @@ async def on_ready():
     guild_obj = discord.Object(id=775209879921098792)
     print("Attempting to clear commands in test guild")
     try:
-        await bot.tree.clear_commands(guild=guild_obj)
+        bot.tree.clear_commands(guild=guild_obj)
         print("Cleared commands in test guild")
     except Exception as e:
         print("Error during clear_commands:", repr(e))
