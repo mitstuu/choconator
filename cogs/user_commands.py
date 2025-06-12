@@ -32,5 +32,5 @@ async def setup(bot):
     cog = UserCommands(bot)
     await bot.add_cog(cog)
 
-    guild = discord.Object(id=775209879921098792)  # your Choco Bar guild ID
-    await bot.tree.sync(guild=guild)  # Sync the command tree for the specific guild
+    #guild = discord.Object(id=775209879921098792)  # your Choco Bar guild ID
+    # await bot.tree.sync(guild=guild)  # Sync the command tree for the specific guild
