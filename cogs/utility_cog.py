@@ -33,10 +33,10 @@ class UtilityCog(commands.Cog):
     @app_commands.command(name="ping", description="Check the bot's latency")
     @app_commands.guilds(discord.Object(id=775209879921098792))  # your Choco Bar guild ID
     async def ping(self, interaction: discord.Interaction):
-        """Reports the bot’s websocket latency."""
+        """Reports the bot’s latency."""
         # bot.latency is in seconds; convert to ms and round
         latency_ms = round(self.bot.latency * 1000)
-        await interaction.response.send_message(f"Pong! Latency is {latency_ms}ms")
+        await interaction.response.send_message(f"Pong! My latency is currently {latency_ms} milliseconds (ms)")
 
     # command to set a user's birthday
     @commands.command(name='bday', aliases=['birthday'])

@@ -19,9 +19,9 @@ class UserCommands(commands.Cog):
         # channel_id = 1130603670388617318 # Tomfoolery channel in choco Bar
         if ctx.channel.id == channel_id:
             # allowed_mentions = discord.AllowedMentions(roles=True)
-            await ctx.send(f"Stop touching grass and chat with us! {REVIVER_ROLE_MENTION}",allowed_mentions=allowed_mentions)
+            await ctx.send(f"Stop touching grass and chat with us! {REVIVER_ROLE_MENTION} >:3",allowed_mentions=allowed_mentions)
         else:
-            await ctx.send('This command can only be used in the main chat channel.')
+            await ctx.send('Head over to <#820784545426964480> and try the command there!')
 
     @revivechat.error
     async def revivechat_error(self, ctx, error):
