@@ -10,11 +10,7 @@ class UserCommands(commands.Cog):
         self.bot = bot
 
     # Revive chat command
-    @commands.hybrid_command(
-        name="revivechat",
-        description="Revive chat in the main channel",
-        # guild_ids=[775209879921098792]  # your Choco Bar guild ID
-    )
+    @commands.hybrid_command(name="revivechat", description="Revive chat in the main channel")
     @commands.cooldown(1, 1800, commands.BucketType.guild)
     @commands.guild_only()
     async def revivechat(self, ctx: commands.Context):
@@ -35,3 +31,6 @@ class UserCommands(commands.Cog):
 async def setup(bot):
     cog = UserCommands(bot)
     await bot.add_cog(cog)
+
+    guild = discord.Object(id=775209879921098792)  # your Choco Bar guild ID
+    await bot.tree.sync(guild=guild)  # Sync the command tree for the specific guild

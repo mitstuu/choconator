@@ -25,11 +25,7 @@ if CHOCONATOR_TOKEN is None:
     exit(1)
 
 # bot instance
-bot= commands.Bot(
-        command_prefix='c.',
-        intents=intents,
-        application_id=1265797492109479977,
-  )  
+bot = commands.Bot(command_prefix='c.', intents=intents)  
 
 # load cogs
 cog_directory = 'cogs'
@@ -50,44 +46,13 @@ async def load_cogs():
 # check if bot is ready
 @bot.event
 async def on_ready():
-    print(f"Logged in as {bot.user} (ID: {bot.user.id}), app ID: {bot.application_id}")
-    # List all guilds your bot is in
-    print("Guilds available to bot:", [(g.name, g.id) for g in bot.guilds])
-
-    # Show what commands the tree currently knows about
-    cmds_before = [c.name for c in bot.tree.get_commands()]
-    print("Commands before sync:", cmds_before)
-
-    # Debug: show each command's configured guild_ids
-    print("Command guild_ids mapping:", {
-        cmd.name: getattr(cmd, "guild_ids", None)
-        for cmd in bot.tree.get_commands()
-    })
-
-    # Attempt per-guild sync
-    guild_obj = discord.Object(id=775209879921098792)
-    try:
-        synced = await bot.tree.sync(guild=guild_obj)
-        print(f"Per-guild sync returned: {[c.name for c in synced]}")
-    except Exception as e:
-        print("Error during per-guild sync:", e)
-
-    try:
-        synced = await bot.tree.copy_global_to(guild=guild_obj)
-        print("Copied global commands to guild:", [c.name for c in synced])
-    except Exception as e:
-        print("Error during copy_global_to:", e)
-
-    synced = await bot.tree.sync(guild=guild_obj)
-    print("Copied & synced:", [c.name for c in synced])
-
-    # If nothing was synced per-guild, fall back to global sync
-    if not synced:
-        try:
-            global_synced = await bot.tree.sync()
-            print(f"Global sync returned: {[c.name for c in global_synced]}")
-        except Exception as e:
-            print("Error during global sync:", e)
+    print('Choconator has connected to Discord!')
+    servers = ''
+    for guilds in bot.guilds:
+        servers += f'{guilds.name}\n'
+    print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
+    await bot.change_presence(activity=discord.Game(name='c.help'))
+    await load_cogs() # Load the cogs when the bot is ready
 
 # event for disconnecting
 @bot.event
