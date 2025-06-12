@@ -14,7 +14,8 @@ class UserCommands(commands.Cog):
     @commands.cooldown(1, 1800, commands.BucketType.guild)
     @commands.guild_only()
     async def revivechat(self, ctx: commands.Context):
-        channel_id = 820784545426964480  # Currently #chat in Choco Bar
+        # channel_id = 820784545426964480  # Currently #chat in Choco Bar
+        channel_id = 1130603670388617318
         if ctx.channel.id == channel_id:
             allowed_mentions = discord.AllowedMentions(roles=True)
             allowed_mentions.roles.add(REVIVER_ROLE_MENTION)  # Add the reviver role mention
