@@ -51,13 +51,25 @@ async def load_cogs():
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user} (ID: {bot.user.id}), app ID: {bot.application_id}")
-    servers = ''
-    for guilds in bot.guilds:
-        servers += f'{guilds.name}\n'
-    print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
-    await bot.change_presence(activity=discord.Game(name='c.help'))
-    # Sync slash commands
-    await bot.tree.sync(guild=discord.Object(id=775209879921098792))
+    # List all guilds your bot is in
+    print("Guilds available to bot:", [(g.name, g.id) for g in bot.guilds])
+
+    # Show what commands the tree currently knows about
+    cmds_before = [c.name for c in bot.tree.get_commands()]
+    print("Commands before sync:", cmds_before)
+
+    # (Optional) clear stale commands on that guild first
+    guild_obj = discord.Object(id=775209879921098792)
+    await bot.tree.clear_commands(guild=guild_obj)
+    print("Cleared commands in test guild")
+
+    # Now sync
+    synced = await bot.tree.sync(guild=guild_obj)
+    print("Synced these commands to guild:", [c.name for c in synced])
+
+    # Final check
+    cmds_after = [c.name for c in bot.tree.get_commands()]
+    print("Commands after sync:", cmds_after)
 
 # event for disconnecting
 @bot.event
