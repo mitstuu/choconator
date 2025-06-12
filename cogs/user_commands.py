@@ -2,20 +2,21 @@ import discord
 from discord.ext import commands
 import math
 
+# Hardcoded mention string for the reviver role
+REVIVER_ROLE_MENTION = "<@&797299435277254676>"  # replace with your actual role ID
+
 class UserCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    # Add your commands here
-
-
+    # Revive chat command
     @commands.hybrid_command(name="revivechat", description="Revive chat in the main channel")
     @commands.cooldown(1, 1800, commands.BucketType.guild)
     @commands.guild_only()
     async def revivechat(self, ctx: commands.Context):
-        channel_id = 820784545426964480  # Replace with the desired channel ID
+        channel_id = 820784545426964480  # Currently #chat in Choco Bar
         if ctx.channel.id == channel_id:
-            await ctx.send('Stop touching grass and chat with us! @mitstuu (replace with reviver ping)')
+            await ctx.send(f"Stop touching grass and chat with us! {REVIVER_ROLE_MENTION}")
         else:
             await ctx.send('This command can only be used in the main chat channel.')
 
