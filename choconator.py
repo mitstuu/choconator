@@ -72,8 +72,13 @@ async def on_ready():
     except Exception as e:
         print("Error during per-guild sync:", e)
 
-    await bot.tree.copy_global_to(guild=775209879921098792)
-    synced = await bot.tree.sync(guild=775209879921098792)
+    try:
+        synced = await bot.tree.copy_global_to(guild=guild_obj)
+        print("Copied global commands to guild:", [c.name for c in synced])
+    except Exception as e:
+        print("Error during copy_global_to:", e)
+
+    synced = await bot.tree.sync(guild=guild_obj)
     print("Copied & synced:", [c.name for c in synced])
 
     # If nothing was synced per-guild, fall back to global sync
