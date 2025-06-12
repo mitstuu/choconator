@@ -25,7 +25,11 @@ if CHOCONATOR_TOKEN is None:
     exit(1)
 
 # bot instance
-bot = commands.Bot(command_prefix='c.', intents=intents)
+bot= commands.Bot(
+        command_prefix='c.',
+        intents=intents,
+        application_id=1265797492109479977,
+  )  
 
 # load cogs
 cog_directory = 'cogs'
