@@ -10,7 +10,11 @@ class UserCommands(commands.Cog):
         self.bot = bot
 
     # Revive chat command
-    @commands.hybrid_command(name="revivechat", description="Revive chat in the main channel")
+    @commands.hybrid_command(
+        name="revivechat",
+        description="Revive chat in the main channel",
+        guild_ids=[775209879921098792]  # your Choco Bar guild ID
+    )
     @commands.cooldown(1, 1800, commands.BucketType.guild)
     @commands.guild_only()
     async def revivechat(self, ctx: commands.Context):
