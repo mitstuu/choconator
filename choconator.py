@@ -46,11 +46,17 @@ async def load_cogs():
 # check if bot is ready
 @bot.event
 async def on_ready():
-    print('Choconator has connected to Discord!')
+    print(f"Logged in as {bot.user} (ID: {bot.user.id}), app ID: {bot.application_id}")
+
     servers = ''
+    
     for guilds in bot.guilds:
         servers += f'{guilds.name}\n'
     print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
+
+    global_synced = await bot.tree.sync()
+    print(f"Global sync now has {len(global_synced)} command(s)") # Sync commands globally
+    
     await bot.change_presence(activity=discord.Game(name='c.help'))
     await load_cogs() # Load the cogs when the bot is ready
 
