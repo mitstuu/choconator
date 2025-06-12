@@ -58,28 +58,27 @@ async def on_ready():
     cmds_before = [c.name for c in bot.tree.get_commands()]
     print("Commands before sync:", cmds_before)
 
-    # (Optional) clear stale commands on that guild first
-    guild_obj = discord.Object(id=775209879921098792)
-    print("Attempting to clear commands in test guild")
-    try:
-        bot.tree.clear_commands(guild=guild_obj)
-        print("Cleared commands in test guild")
-    except Exception as e:
-        print("Error during clear_commands:", repr(e))
+    # Debug: show each command's configured guild_ids
+    print("Command guild_ids mapping:", {
+        cmd.name: getattr(cmd, "guild_ids", None)
+        for cmd in bot.tree.get_commands()
+    })
 
-    print("Attempting to sync commands in test guild")
+    # Attempt per-guild sync
+    guild_obj = discord.Object(id=775209879921098792)
     try:
         synced = await bot.tree.sync(guild=guild_obj)
-        print("Synced these commands to guild:", [c.name for c in synced])
+        print(f"Per-guild sync returned: {[c.name for c in synced]}")
     except Exception as e:
-        print("Error during sync:", repr(e))
+        print("Error during per-guild sync:", e)
 
-    print("Checking commands after sync")
-    try:
-        cmds_after = [c.name for c in bot.tree.get_commands()]
-        print("Commands after sync:", cmds_after)
-    except Exception as e:
-        print("Error getting commands after sync:", repr(e))
+    # If nothing was synced per-guild, fall back to global sync
+    if not synced:
+        try:
+            global_synced = await bot.tree.sync()
+            print(f"Global sync returned: {[c.name for c in global_synced]}")
+        except Exception as e:
+            print("Error during global sync:", e)
 
 # event for disconnecting
 @bot.event
