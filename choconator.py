@@ -19,7 +19,7 @@ intents.guilds = True
 intents.members = True
 
 # environment variables
-CHOCONATOR_TOKEN = os.getenv('CHOCODEV_TOKEN')
+CHOCONATOR_TOKEN = os.getenv('CHOCONATOR_TOKEN')
 if CHOCONATOR_TOKEN is None:
     print("Error: CHOCONATOR_TOKEN environment variable is not set.")
     exit(1)
