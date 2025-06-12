@@ -31,6 +31,7 @@ class UtilityCog(commands.Cog):
 
     # ping command to measure response time
     @app_commands.command(name="ping", description="Check the bot's latency")
+    @app_commands.guilds(discord.Object(id=775209879921098792))  # your Choco Bar guild ID
     async def ping(self, interaction: discord.Interaction):
         """Reports the bot’s websocket latency."""
         # bot.latency is in seconds; convert to ms and round

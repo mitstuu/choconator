@@ -16,6 +16,8 @@ class UserCommands(commands.Cog):
     async def revivechat(self, ctx: commands.Context):
         channel_id = 820784545426964480  # Currently #chat in Choco Bar
         if ctx.channel.id == channel_id:
+            allowed_mentions = discord.AllowedMentions(roles=True)
+            allowed_mentions.roles.add(REVIVER_ROLE_MENTION)  # Add the reviver role mention
             await ctx.send(f"Stop touching grass and chat with us! {REVIVER_ROLE_MENTION}")
         else:
             await ctx.send('This command can only be used in the main chat channel.')
