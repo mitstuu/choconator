@@ -56,7 +56,8 @@ async def on_ready():
         servers += f'{guilds.name}\n'
     print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
     await bot.change_presence(activity=discord.Game(name='c.help'))
-
+    # Sync slash commands
+    await bot.tree.sync(guild=discord.Object(id=775209879921098792))
 
 # event for disconnecting
 @bot.event
