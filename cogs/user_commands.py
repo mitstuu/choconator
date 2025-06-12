@@ -9,6 +9,13 @@ class UserCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.Cog.listener()
+    async def on_ready(self):
+        # Sync slash (hybrid) commands to your test guild once the bot is ready
+        guild = discord.Object(id=775209879921098792)  # ← replace this with your actual guild ID
+        await self.bot.tree.sync(guild=guild)
+        print(f"Synced slash commands for guild {guild.id}")
+
     # Revive chat command
     @commands.hybrid_command(name="revivechat", description="Revive chat in the main channel")
     @commands.cooldown(1, 1800, commands.BucketType.guild)
@@ -31,8 +38,3 @@ class UserCommands(commands.Cog):
 async def setup(bot):
     cog = UserCommands(bot)
     await bot.add_cog(cog)
-
-    # Make a "guild object" and sync there
-    guild = discord.Object(id=775209879921098792) # test guild ID 
-    await bot.tree.sync(guild=guild)
-    print(f"Synced slash commands to guild")
