@@ -54,6 +54,14 @@ async def on_ready():
         servers += f'{guilds.name}\n'
     print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
 
+    guild = discord.Object(id=775209879921098792)
+    synced_guild = await bot.tree.sync(guild=guild)
+    print(f"Synced {len(synced_guild)} guild command(s):", 
+          [c.name for c in synced_guild])
+
+    for cmd in synced_guild:   # Print the synced commands
+        print(f" • {cmd.name}")
+
     global_synced = await bot.tree.sync()
     print(f"Global sync now has {len(global_synced)} command(s)") # Sync commands globally
     
