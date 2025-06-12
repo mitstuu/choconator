@@ -67,7 +67,7 @@ async def on_ready():
     # Attempt per-guild sync
     guild_obj = discord.Object(id=775209879921098792)
     try:
-        synced = await bot.tree.sync(guild=guild_obj)
+        synced = await bot.tree.sync(guild=775209879921098792)
         print(f"Per-guild sync returned: {[c.name for c in synced]}")
     except Exception as e:
         print("Error during per-guild sync:", e)
