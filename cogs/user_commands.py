@@ -15,8 +15,8 @@ class UserCommands(commands.Cog):
     @commands.cooldown(1, 1800, commands.BucketType.guild)
     @commands.guild_only()
     async def revivechat(self, ctx: commands.Context):
-        # channel_id = 820784545426964480  # Currently #chat in Choco Bar
-        channel_id = 1130603670388617318
+        channel_id = 820784545426964480  # Currently #chat in Choco Bar
+        # channel_id = 1130603670388617318 # Tomfoolery channel in choco Bar
         if ctx.channel.id == channel_id:
             # allowed_mentions = discord.AllowedMentions(roles=True)
             await ctx.send(f"Stop touching grass and chat with us! {REVIVER_ROLE_MENTION}",allowed_mentions=allowed_mentions)
