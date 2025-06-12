@@ -52,7 +52,6 @@ async def on_ready():
         servers += f'{guilds.name}\n'
     print(f'Connected to {len(bot.guilds)} server(s):\n{servers}')
     await bot.change_presence(activity=discord.Game(name='c.help'))
-    await load_cogs() # Load the cogs when the bot is ready
 
 
 # event for disconnecting
@@ -62,4 +61,12 @@ async def on_disconnect():
 
 
 # run the bot
-bot.run(CHOCONATOR_TOKEN)
+
+async def main():
+    # Load all cogs before connecting so Cog listeners register in time
+    await load_cogs()
+    await bot.start(CHOCONATOR_TOKEN)
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(main())
