@@ -29,13 +29,16 @@ class UtilityCog(commands.Cog):
             await channel.send(f'Welcome to Choco Bar, {member.mention}! {welcomers.mention}s, assemble!')
 
     # ping command to measure response time
-    @commands.command(name='ping')
-    async def ping(self, ctx):
-        start_time = datetime.datetime.now()
-        message = await ctx.reply("Pinging...")
-        end_time = datetime.datetime.now()
-        response_time = (end_time - start_time).total_seconds() * 1000
-        await message.edit(content=f"Pong! Response time: {response_time} ms")
+    @commands.hybrid_command(
+        name="ping",
+        description="Check the bot's latency",
+        #guild_ids=[775209879921098792]  # ← replace with your guild ID(s)
+    )
+    async def ping(self, ctx: commands.Context):
+        """Reports the bot’s websocket latency."""
+        # bot.latency is in seconds; convert to ms and round
+        latency_ms = round(self.bot.latency * 1000)
+        await ctx.send(f"Pong! Latency is {latency_ms}ms")
 
     # command to set a user's birthday
     @commands.command(name='bday', aliases=['birthday'])
@@ -61,3 +64,5 @@ class UtilityCog(commands.Cog):
 async def setup(bot):
     await bot.add_cog(UtilityCog(bot))
 
+    guild = discord.Object(id=775209879921098792)  # your Choco Bar guild ID
+    await bot.tree.sync(guild=guild)  # Sync the command tree for the specific guild
