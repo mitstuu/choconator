@@ -11,10 +11,14 @@ class UserCommands(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        # Sync slash (hybrid) commands to your test guild once the bot is ready
-        guild = discord.Object(id=775209879921098792)  # ← replace this with your actual guild ID
-        await self.bot.tree.sync(guild=guild)
-        print(f"Synced slash commands for guild {guild.id}")
+        # Sync slash commands to all guilds once the bot is ready
+        for guild in self.bot.guilds:
+            guild_obj = discord.Object(id=guild.id)
+            try:
+                await self.bot.tree.sync(guild=guild_obj)
+                print(f"Synced slash commands to guild {guild.id}")
+            except Exception as e:
+                print(f"Failed to sync slash commands to guild {guild.id}: {e}")
 
     # Revive chat command
     @commands.hybrid_command(name="revivechat", description="Revive chat in the main channel")
